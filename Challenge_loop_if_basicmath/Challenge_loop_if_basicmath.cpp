@@ -7,7 +7,7 @@ int main() {
     int bound2;
     scanf("%d %d", &bound1, &bound2);
 
-    size_t count = 0;
+    int count = 0;
     double sum_sq = 0.0;
     double mean = (bound1 + bound2) / 2.0;
 
@@ -19,17 +19,19 @@ int main() {
         sum_sq += diff * diff;
     };
 
-    if (bound1 < bound2) {
-        for (int i = bound1; i <= bound2; ++i)
-            AddResult(i);
-    }
-    else {
-        for (int i = bound1; i >= bound2; --i)
-            AddResult(i);
+    if (bound1 != bound2) {
+        if (bound1 < bound2) {
+            for (int i = bound1; i <= bound2; ++i)
+                AddResult(i);
+        }
+        else {
+            for (int i = bound1; i >= bound2; --i)
+                AddResult(i);
+        }
     }
     
     printf("\nAverage = %.1f", mean);
 
-    double deviation = count > 0 ? (sqrt(sum_sq) / count) : 0.0;
+    double deviation = count > 0 ? sqrt(sum_sq / (count - 1)) : 0.0;
     printf("\nSD = %.2f", deviation);
 }
